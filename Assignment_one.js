@@ -30,3 +30,10 @@ switch(size){
     default:
         console.log("Invalid size")
 }
+
+// Loop through this array and print each item
+const menu = ["Espresso", "Latte", "Cappuccino", "Mocha", "Cold Brew"];
+
+for (let i = 0; i < menu.length; i++) {
+    console.log(i + 1 + ". " + menu[i]);
+}
