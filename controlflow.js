@@ -20,3 +20,21 @@ switch (day) {
     default:
         console.log("It's a regular day.");
 }
+
+let year = prompt("The current year is:", "")
+
+if (year == 2025){
+    alert("You're right")
+}else {
+    alert("Better luck next year, buddy!")
+}
+
+let year = prompt('In which year was the bible published?', '');
+
+if (year < 2015) {
+  alert( 'Too early...' );
+} else if (year > 2015) {
+  alert( 'Too late' );
+} else {
+  alert( 'Exactly!' );
+}
