@@ -38,3 +38,28 @@ if (year < 2015) {
 } else {
   alert( 'Exactly!' );
 }
+
+//CONDITIONAL OPERATOR ?
+let accessAllowed;
+let age = prompt('How old are you?', '');
+
+if (age > 18) {
+  accessAllowed = true;
+} else {
+  accessAllowed = false;
+}
+
+alert(accessAllowed);
+
+//redone to allow conditional statement ?
+let accessAllowed = (age>18) ? True : false;
+
+
+let age = prompt('age?', 18);
+
+let message = (age < 3) ? 'Hi, baby!' :
+  (age < 18) ? 'Hello!' :
+  (age < 100) ? 'Greetings!' :
+  'What an unusual age!';
+
+alert( message );

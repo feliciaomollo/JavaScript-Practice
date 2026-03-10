@@ -37,3 +37,35 @@ const menu = ["Espresso", "Latte", "Cappuccino", "Mocha", "Cold Brew"];
 for (let i = 0; i < menu.length; i++) {
     console.log(i + 1 + ". " + menu[i]);
 }
+
+//Write a switch statement that prints a different coffee recommendation based on the day of the week.
+let day = "Monday";
+let weather = "rainy"; // declare weather variable
+
+// switch handles the day
+switch(day) {
+    case 'Monday':
+        console.log("Start your week with a strong Espresso!")
+        break;
+    case 'Wednesday':
+        console.log("Hump day! Treat yourself to a Mocha")
+        break;
+    case 'Friday':
+        console.log("TGIF! Celebrate with a Cold Brew")
+        break;
+    case 'Saturday':
+        console.log("Weekend vibes! Try a Caramel Latte")
+        break;
+    case 'Sunday':
+        console.log("Slow Sunday, enjoy a Cappuccino")
+        break;
+    default:
+        console.log("Just a regular day, have a regular coffee")
+}
+
+// After the switch, add an if statement. if statement handles the weather 
+if (weather === "rainy") {
+    console.log("It's rainy today, extra shot recommended!")
+} else {
+    console.log("Beautiful day to enjoy your coffee outside!")
+}
