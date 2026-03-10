@@ -8,6 +8,26 @@ if (age >= 60){
     console.log ("You're Young");
 }
 
+const bpm = 128;
+
+if (bpm < 100) {
+    console.log("Slow tempo — good for RnB");
+} else if (bpm >= 100 && bpm <= 130) {
+    console.log("Mid tempo — good for Hip Hop");
+} else {
+    console.log("Fast tempo — good for House music");
+}
+
+const targetBPM = "128"; 
+
+let trackBPM = 128; 
+
+if (trackBPM === targetBPM) {
+    console.log("BPM matches!");
+} else {
+    console.log("Convert your types first!"); 
+}
+
 //switch statement
 const day = "Monday";
 switch (day) {
@@ -63,3 +83,13 @@ let message = (age < 3) ? 'Hi, baby!' :
   'What an unusual age!';
 
 alert( message );
+
+if (age < 3) {
+  message = 'Hi, baby!';
+} else if (age < 18) {
+  message = 'Hello!';
+} else if (age < 100) {
+  message = 'Greetings!';
+} else {
+  message = 'What an unusual age!';
+}
