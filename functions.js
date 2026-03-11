@@ -69,12 +69,30 @@ function greetDJ(name){
     return `Hello, Welcome to your set ${name}`
 }
 
-const greetDJ = function(name){
+const greetDJ_two = function(name){
     return `Hello, Welcome to your set ${name}`
 }
 
-const greetDj = (name)=>{
+const greetDJ_three = (name)=>{
     return `Hello, Welcome to your set ${name}`
 }
 
 greetDJ('Andiego')
+
+const calcSetDuration = (tracks, minutesPerTrack) => {
+    // 1. calculate total duration here
+    const totalDuration = tracks * minutesPerTrack
+    // 2. return a template literal with the result
+    return `Your set is ${totalDuration} long`
+}
+
+// 3. console.log the function calls down here
+console.log(calcSetDuration(10, 6))
+
+//default parameters
+const orderDrink = (drink, size = "Medium") => {
+    return `One ${size} ${drink} coming up!`
+}
+
+console.log(orderDrink("Latte", "Large"))  // "One Large Latte coming up!"
+console.log(orderDrink("Espresso"))        // "One Medium Espresso coming up!"
