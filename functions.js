@@ -12,6 +12,22 @@ function add(a, b) {
     return a + b;
 }
 
+// 1. Regular function declaration
+function greet(name) {
+    return `Hello ${name}`;
+}
+
+// 2. Function expression — stored in a variable
+const greet = function(name) {
+    return `Hello ${name}`;
+};
+
+// 3. Arrow function — shortest, most modern
+const greet = (name) => `Hello ${name}`;
+
+// All three do the same thing!
+greet("Claude"); // "Hello Claude"
+
 // Same thing as arrow function
 const add = (a, b) => a + b;
 
