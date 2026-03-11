@@ -26,7 +26,7 @@ const greet = function(name) {
 const greet = (name) => `Hello ${name}`;
 
 // All three do the same thing!
-greet("Claude"); // "Hello Claude"
+greet("Hello, World!"); 
 
 // Same thing as arrow function
 const add = (a, b) => a + b;
@@ -62,3 +62,19 @@ function calculateOrder(item, price){
 calculateOrder('Latte', 20)
 calculateOrder('Espresso', 40)
 calculateOrder('Mocha', 60)
+
+//Write a function called greetDJ that takes a name parameter and prints: "Welcome to the stage, DJ [name]!"
+
+function greetDJ(name){
+    return `Hello, Welcome to your set ${name}`
+}
+
+const greetDJ = function(name){
+    return `Hello, Welcome to your set ${name}`
+}
+
+const greetDj = (name)=>{
+    return `Hello, Welcome to your set ${name}`
+}
+
+greetDJ('Andiego')
