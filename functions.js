@@ -96,3 +96,32 @@ const orderDrink = (drink, size = "Medium") => {
 
 console.log(orderDrink("Latte", "Large"))  // "One Large Latte coming up!"
 console.log(orderDrink("Espresso"))        // "One Medium Espresso coming up!"
+
+
+
+// Step 1 — write calcPrice first
+const calcPrice = (price, quantity) => {
+    const totalPrice = price * quantity
+    return totalPrice
+}
+
+// Step 2 — write printOrder and call calcPrice inside
+const printOrder = (item, price, quantity) => {
+    // call calcPrice here and store the result
+    const totalPrintOrder = calcPrice( totalPrice)
+    // return a template literal using all parameters
+    return `Your total ${totalPrintOrder}`
+}
+
+// Step 3 — console.log outside
+console.log(printOrder("Latte", 4, 3))
+console.log(printOrder("Espresso", 3, 2))
+
+
+//Write a function called `djSetSummary` that takes:
+
+const djSetSummary = (djName, tracks, minutesPerTrack) =>{
+    return `${djName} will play ${tracks} for a total of ${minutesPerTrack}`
+}
+
+console.log('Andiego', '10', '50')
