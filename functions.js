@@ -108,9 +108,9 @@ const calcPrice = (price, quantity) => {
 // Step 2 — write printOrder and call calcPrice inside
 const printOrder = (item, price, quantity) => {
     // call calcPrice here and store the result
-    const totalPrintOrder = calcPrice( totalPrice)
+    const totalPrintOrder = calcPrice( price, quantity)
     // return a template literal using all parameters
-    return `Your total ${totalPrintOrder}`
+    return `${quantity} ${item}s = $${totalPrintOrder} total` 
 }
 
 // Step 3 — console.log outside
@@ -118,10 +118,18 @@ console.log(printOrder("Latte", 4, 3))
 console.log(printOrder("Espresso", 3, 2))
 
 
-//Write a function called `djSetSummary` that takes:
+//Write a function called `djSetSummary`
 
-const djSetSummary = (djName, tracks, minutesPerTrack) =>{
-    return `${djName} will play ${tracks} for a total of ${minutesPerTrack}`
+// Reuse calcSetDuration from yesterday!
+const calcSetDuration = (tracks, minutesPerTrack) => {
+    const totalDuration = tracks * minutesPerTrack
+    return `${totalDuration}`
 }
 
-console.log('Andiego', '10', '50')
+const djSetSummary = (djName, tracks, minutesPerTrack = 5) => {//checks for default parameter
+    const duration = calcSetDuration(tracks, minutesPerTrack) // reusing function
+    return `DJ ${djName} will play ${tracks} tracks for a total of ${duration} minutes!`
+}
+
+console.log(djSetSummary("Andiego", 10))// "DJ Andiego will play 10 tracks for a total of 50 minutes!"
+
