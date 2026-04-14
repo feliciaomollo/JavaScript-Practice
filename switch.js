@@ -9,7 +9,7 @@ switch (a) {
     break;
   case 5:
     alert( 'Too big' );
-    break;
+    break; //add a break statement else it will go on a loop.
   default:
     alert( "I don't know such values" );
 }
