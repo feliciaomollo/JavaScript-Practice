@@ -65,3 +65,18 @@ console.log('Global Variable: ' + globalVar);
 
 let obj = new Geeks();
 obj.assignNum(); 
+
+let number1: number = 1;
+
+function let_keyword() {
+  let number2: number = 2;
+  if (number1 + number2 == 3) {
+    let number3: number = 3;
+  }
+
+  console.log(number1);
+  console.log(number2);
+  console.log(number3); // Throws error
+}
+
+let_keyword();
