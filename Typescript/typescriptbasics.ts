@@ -37,3 +37,31 @@ function displayGlobalVar() {
   console.log(globalVar); 
 }
 displayGlobalVar();
+
+//class Scope
+class Employee {
+    salary: number = 50000;
+    printSalary(): void { //Method name with no parameters and Return type — means the function returns nothing
+        console.log(`Salary: ${this.salary}`); //Refers to the salary property of the current object. this is important here — it tells TypeScript to look for salary inside the same instance of the class, not some external variable.
+    }
+}
+
+const emp = new Employee();
+emp.printSalary();
+
+//Understanding variables
+let globalVar: number = 10;
+
+class Geeks {
+    private classVar: number = 11;
+
+    assignNum(): void {
+        let localVar: number = 12;
+        console.log('Local Variable: ' + localVar);
+    }
+}
+
+console.log('Global Variable: ' + globalVar);
+
+let obj = new Geeks();
+obj.assignNum(); 
