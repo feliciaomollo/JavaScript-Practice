@@ -66,9 +66,10 @@ console.log('Global Variable: ' + globalVar);
 let obj = new Geeks();
 obj.assignNum(); 
 
+//variables using let keyword. The let variables are block-scoped.
 let number1: number = 1;
 
-function let_keyword() {
+function keyword() {
   let number2: number = 2;
   if (number1 + number2 == 3) {
     let number3: number = 3;
@@ -76,7 +77,23 @@ function let_keyword() {
 
   console.log(number1);
   console.log(number2);
-  console.log(number3); // Throws error
+  console.log(number3); // Throws error but gets better after converting to js.
 }
 
-let_keyword();
+keyword();
+
+//var keyword
+var number1: number = 1;
+
+function var_keyword() {
+  var number2: number = 2;
+  if (number1 + number2 == 3) {
+    var number3: number = 3;
+  }
+
+  console.log(number1);
+  console.log(number2);
+  console.log(number3);
+}
+
+var_keyword();
