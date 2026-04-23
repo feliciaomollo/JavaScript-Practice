@@ -17,4 +17,11 @@ getUpper("water")
 signIn("Fele","fele@gmail.com", true)
 loginUser("Fels", "fels@yahoo.com", true)
 
+
+const superHeros = ["Thor", "Spiderman", "Wonderwoman"]
+
+superHeros.map((superHeros): string =>{
+    return `Your favorite Hero is ${superHeros}`
+})
+
 export{}
