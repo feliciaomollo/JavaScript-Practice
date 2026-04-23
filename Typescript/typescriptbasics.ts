@@ -97,3 +97,5 @@ function var_keyword() {
 }
 
 var_keyword();
+
+export {}// gets rid of the squiggly error
