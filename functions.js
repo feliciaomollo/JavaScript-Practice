@@ -133,3 +133,13 @@ const djSetSummary = (djName, tracks, minutesPerTrack = 5) => {//checks for defa
 
 console.log(djSetSummary("Andiego", 10))// "DJ Andiego will play 10 tracks for a total of 50 minutes!"
 
+function showPrimes(n) {
+  nextPrime: for (let i = 2; i < n; i++) {
+
+    for (let j = 2; j < i; j++) {
+      if (i % j == 0) continue nextPrime;
+    }
+
+    alert( i ); // a prime
+  }
+}

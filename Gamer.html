@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Errol Asimba's Decision Game</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #fdf6ec;
+      --primary: #e8472a;
+      --secondary: #f5a623;
+      --accent: #2a9d8f;
+      --dark: #1a1a2e;
+      --card: #fff8f0;
+      --win: #2a9d8f;
+      --lose: #e8472a;
+      --tie: #f5a623;
+      --shadow: 4px 4px 0px #1a1a2e;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background-color: var(--bg);
+      background-image:
+        radial-gradient(circle at 10% 20%, rgba(232,71,42,0.08) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(42,157,143,0.08) 0%, transparent 40%),
+        url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23e8472a' fill-opacity='0.04'%3E%3Ccircle cx='20' cy='20' r='3'/%3E%3C/g%3E%3C/svg%3E");
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 30px 16px 50px;
+    }
+
+    /* HEADER */
+    header {
+      text-align: center;
+      margin-bottom: 28px;
+      animation: dropIn 0.6s cubic-bezier(.34,1.56,.64,1) both;
+    }
+
+    .subtitle {
+      font-size: 0.85rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--secondary);
+      font-weight: 800;
+      margin-bottom: 6px;
+    }
+
+    h1 {
+      font-family: 'Lilita One', cursive;
+      font-size: clamp(2rem, 7vw, 3.4rem);
+      color: var(--dark);
+      line-height: 1.1;
+      text-shadow: 3px 3px 0 var(--secondary);
+    }
+
+    h1 span {
+      color: var(--primary);
+      text-shadow: 3px 3px 0 var(--dark);
+    }
+
+    .tagline {
+      margin-top: 8px;
+      font-size: 0.95rem;
+      color: #666;
+      font-weight: 600;
+    }
+
+    /* SCOREBOARD */
+    .scoreboard {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 28px;
+      animation: dropIn 0.6s 0.1s cubic-bezier(.34,1.56,.64,1) both;
+    }
+
+    .score-card {
+      background: var(--card);
+      border: 3px solid var(--dark);
+      box-shadow: var(--shadow);
+      border-radius: 14px;
+      padding: 12px 22px;
+      text-align: center;
+      min-width: 80px;
+      transition: transform 0.15s;
+    }
+
+    .score-card.bump {
+      animation: bump 0.35s cubic-bezier(.34,1.56,.64,1);
+    }
+
+    .score-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      font-weight: 800;
+      color: #888;
+    }
+
+    .score-number {
+      font-family: 'Lilita One', cursive;
+      font-size: 2.2rem;
+      line-height: 1.1;
+    }
+
+    .score-card.wins .score-number { color: var(--win); }
+    .score-card.losses .score-number { color: var(--lose); }
+    .score-card.ties .score-number { color: var(--tie); }
+
+    /* BATTLE AREA */
+    .battle-area {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 28px;
+      background: var(--card);
+      border: 3px solid var(--dark);
+      box-shadow: var(--shadow);
+      border-radius: 20px;
+      padding: 20px 28px;
+      width: 100%;
+      max-width: 480px;
+      min-height: 110px;
+      animation: dropIn 0.6s 0.2s cubic-bezier(.34,1.56,.64,1) both;
+    }
+
+    .fighter {
+      text-align: center;
+      flex: 1;
+    }
+
+    .fighter-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-weight: 800;
+      color: #aaa;
+      margin-bottom: 4px;
+    }
+
+    .fighter-emoji {
+      font-size: 3.2rem;
+      line-height: 1;
+      display: block;
+      transition: transform 0.2s;
+    }
+
+    .fighter-name {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--dark);
+      margin-top: 4px;
+    }
+
+    .vs-badge {
+      font-family: 'Lilita One', cursive;
+      font-size: 1.4rem;
+      color: var(--primary);
+      background: var(--bg);
+      border: 3px solid var(--dark);
+      border-radius: 50%;
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      box-shadow: 2px 2px 0 var(--dark);
+    }
+
+    /* RESULT BANNER */
+    .result-banner {
+      width: 100%;
+      max-width: 480px;
+      min-height: 58px;
+      border-radius: 16px;
+      border: 3px solid var(--dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 28px;
+      font-family: 'Lilita One', cursive;
+      font-size: 1.4rem;
+      letter-spacing: 0.02em;
+      box-shadow: var(--shadow);
+      background: #eee;
+      color: #bbb;
+      transition: background 0.25s, color 0.25s;
+      animation: dropIn 0.6s 0.3s cubic-bezier(.34,1.56,.64,1) both;
+    }
+
+    .result-banner.win  { background: #d4f5f0; color: var(--win); }
+    .result-banner.lose { background: #fde8e4; color: var(--lose); }
+    .result-banner.tie  { background: #fef3d8; color: var(--tie); }
+
+    /* MOVE BUTTONS */
+    .moves {
+      display: flex;
+      gap: 14px;
+      margin-bottom: 24px;
+      animation: dropIn 0.6s 0.4s cubic-bezier(.34,1.56,.64,1) both;
+    }
+
+    .move-btn {
+      background: var(--card);
+      border: 3px solid var(--dark);
+      box-shadow: var(--shadow);
+      border-radius: 18px;
+      padding: 16px 20px;
+      cursor: pointer;
+      font-family: 'Nunito', sans-serif;
+      font-weight: 800;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--dark);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      transition: transform 0.1s, box-shadow 0.1s;
+      min-width: 90px;
+      user-select: none;
+    }
+
+    .move-btn span.icon { font-size: 2.4rem; }
+
+    .move-btn:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: 6px 6px 0px var(--dark);
+    }
+
+    .move-btn:active {
+      transform: translate(2px, 2px);
+      box-shadow: 1px 1px 0px var(--dark);
+    }
+
+    .move-btn.rock:hover   { background: #fde8e4; }
+    .move-btn.scissors:hover { background: #fef3d8; }
+    .move-btn.paper:hover  { background: #d4f5f0; }
+
+    .move-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: var(--shadow);
+    }
+
+    /* HISTORY */
+    .history-section {
+      width: 100%;
+      max-width: 480px;
+      animation: dropIn 0.6s 0.5s cubic-bezier(.34,1.56,.64,1) both;
+    }
+
+    .history-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .history-title {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      font-weight: 800;
+      color: #888;
+    }
+
+    .reset-btn {
+      background: none;
+      border: 2px solid #ccc;
+      border-radius: 8px;
+      padding: 4px 12px;
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: #999;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .reset-btn:hover { border-color: var(--primary); color: var(--primary); }
+
+    .history-list {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+      max-height: 200px;
+      overflow-y: auto;
+    }
+
+    .history-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--card);
+      border: 2px solid #e8e0d4;
+      border-radius: 10px;
+      padding: 8px 14px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      animation: slideIn 0.3s cubic-bezier(.34,1.56,.64,1) both;
+    }
+
+    .history-item .dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .history-item.win .dot  { background: var(--win); }
+    .history-item.lose .dot { background: var(--lose); }
+    .history-item.tie .dot  { background: var(--tie); }
+
+    .history-item .moves-text { color: #555; flex: 1; }
+    .history-item .outcome { font-family: 'Lilita One', cursive; font-size: 0.9rem; }
+    .history-item.win .outcome  { color: var(--win); }
+    .history-item.lose .outcome { color: var(--lose); }
+    .history-item.tie .outcome  { color: var(--tie); }
+
+    .empty-history {
+      text-align: center;
+      color: #bbb;
+      font-size: 0.85rem;
+      font-weight: 600;
+      padding: 16px 0;
+    }
+
+    /* SHAKE ANIMATION on computer emoji */
+    .shake { animation: shake 0.4s cubic-bezier(.36,.07,.19,.97) both; }
+
+    @keyframes shake {
+      10%, 90% { transform: translate3d(-2px,0,0); }
+      20%, 80% { transform: translate3d(3px,0,0); }
+      30%, 50%, 70% { transform: translate3d(-4px,0,0); }
+      40%, 60% { transform: translate3d(4px,0,0); }
+    }
+
+    @keyframes bump {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.25); }
+      100% { transform: scale(1); }
+    }
+
+    @keyframes dropIn {
+      from { opacity: 0; transform: translateY(-18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateX(-10px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+
+    @media (max-width: 420px) {
+      .moves { gap: 8px; }
+      .move-btn { min-width: 76px; padding: 12px 10px; }
+      .move-btn span.icon { font-size: 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <p class="subtitle">✨ Welcome to ✨</p>
+    <h1>Aunty <span>Fele's</span><br>Decision Game</h1>
+    <p class="tagline">Rock, Paper, or Scissors — what will you choose?</p>
+  </header>
+
+  <!-- SCOREBOARD -->
+  <div class="scoreboard">
+    <div class="score-card wins" id="card-wins">
+      <div class="score-label">Wins</div>
+      <div class="score-number" id="score-wins">0</div>
+    </div>
+    <div class="score-card losses" id="card-losses">
+      <div class="score-label">Losses</div>
+      <div class="score-number" id="score-losses">0</div>
+    </div>
+    <div class="score-card ties" id="card-ties">
+      <div class="score-label">Ties</div>
+      <div class="score-number" id="score-ties">0</div>
+    </div>
+  </div>
+
+  <!-- BATTLE AREA -->
+  <div class="battle-area">
+    <div class="fighter">
+      <div class="fighter-label">You</div>
+      <span class="fighter-emoji" id="player-emoji">🤔</span>
+      <div class="fighter-name" id="player-name">—</div>
+    </div>
+    <div class="vs-badge">VS</div>
+    <div class="fighter">
+      <div class="fighter-label">Aunty Fele</div>
+      <span class="fighter-emoji" id="computer-emoji">🤫</span>
+      <div class="fighter-name" id="computer-name">—</div>
+    </div>
+  </div>
+
+  <!-- RESULT -->
+  <div class="result-banner" id="result-banner">Make your move!</div>
+
+  <!-- BUTTONS -->
+  <div class="moves">
+    <button class="move-btn rock" onclick="play('Rock')">
+      <span class="icon">✊</span>Rock
+    </button>
+    <button class="move-btn scissors" onclick="play('Scissors')">
+      <span class="icon">✌️</span>Scissors
+    </button>
+    <button class="move-btn paper" onclick="play('Paper')">
+      <span class="icon">🖐️</span>Paper
+    </button>
+  </div>
+
+  <!-- HISTORY -->
+  <div class="history-section">
+    <div class="history-header">
+      <span class="history-title">📜 Round History</span>
+      <button class="reset-btn" onclick="resetGame()">Reset All</button>
+    </div>
+    <div class="history-list" id="history-list">
+      <div class="empty-history">No rounds played yet</div>
+    </div>
+  </div>
+
+  <script>
+    const emojis = { Rock: '✊', Scissors: '✌️', Paper: '🖐️' };
+    const moves = ['Rock', 'Paper', 'Scissors'];
+
+    let wins = 0, losses = 0, ties = 0, history = [];
+
+    function pickComputerMove() {
+      return moves[Math.floor(Math.random() * 3)];
+    }
+
+    function getOutcome(player, computer) {
+      if (player === computer) return 'tie';
+      if (
+        (player === 'Rock' && computer === 'Scissors') ||
+        (player === 'Scissors' && computer === 'Paper') ||
+        (player === 'Paper' && computer === 'Rock')
+      ) return 'win';
+      return 'lose';
+    }
+
+    function play(playerMove) {
+      const computerMove = pickComputerMove();
+      const outcome = getOutcome(playerMove, computerMove);
+
+      // Update emojis
+      document.getElementById('player-emoji').textContent = emojis[playerMove];
+      document.getElementById('player-name').textContent = playerMove;
+
+      const compEmoji = document.getElementById('computer-emoji');
+      compEmoji.textContent = '🤫';
+      compEmoji.classList.remove('shake');
+      void compEmoji.offsetWidth; // reflow to restart animation
+      compEmoji.classList.add('shake');
+      setTimeout(() => {
+        compEmoji.textContent = emojis[computerMove];
+        compEmoji.classList.remove('shake');
+      }, 400);
+
+      document.getElementById('computer-name').textContent = computerMove;
+
+      // Result banner
+      const banner = document.getElementById('result-banner');
+      banner.className = 'result-banner';
+      let message = '';
+      if (outcome === 'win') {
+        wins++;
+        message = '🎉 You Win This Round!';
+        setTimeout(() => banner.classList.add('win'), 420);
+        bumpCard('card-wins', 'score-wins', wins);
+      } else if (outcome === 'lose') {
+        losses++;
+        message = '😅 Aunty Fele Wins!';
+        setTimeout(() => banner.classList.add('lose'), 420);
+        bumpCard('card-losses', 'score-losses', losses);
+      } else {
+        ties++;
+        message = '🤝 It\'s a Tie!';
+        setTimeout(() => banner.classList.add('tie'), 420);
+        bumpCard('card-ties', 'score-ties', ties);
+      }
+      setTimeout(() => { banner.textContent = message; }, 420);
+
+      // History
+      addHistory(playerMove, computerMove, outcome);
+
+      // Briefly disable buttons
+      document.querySelectorAll('.move-btn').forEach(b => b.disabled = true);
+      setTimeout(() => document.querySelectorAll('.move-btn').forEach(b => b.disabled = false), 700);
+    }
+
+    function bumpCard(cardId, numId, value) {
+      const card = document.getElementById(cardId);
+      const num = document.getElementById(numId);
+      num.textContent = value;
+      card.classList.remove('bump');
+      void card.offsetWidth;
+      card.classList.add('bump');
+    }
+
+    function addHistory(player, computer, outcome) {
+      const labels = { win: 'You won!', lose: 'You lost!', tie: 'Tie!' };
+      history.unshift({ player, computer, outcome });
+      if (history.length > 10) history.pop();
+      renderHistory();
+    }
+
+    function renderHistory() {
+      const list = document.getElementById('history-list');
+      if (history.length === 0) {
+        list.innerHTML = '<div class="empty-history">No rounds played yet</div>';
+        return;
+      }
+      list.innerHTML = history.map((h, i) => `
+        <div class="history-item ${h.outcome}" style="animation-delay:${i * 0.03}s">
+          <div class="dot"></div>
+          <div class="moves-text">${emojis[h.player]} ${h.player} vs ${emojis[h.computer]} ${h.computer}</div>
+          <div class="outcome">${{ win: 'You won!', lose: 'Lost!', tie: 'Tie!' }[h.outcome]}</div>
+        </div>
+      `).join('');
+    }
+
+    function resetGame() {
+      wins = 0; losses = 0; ties = 0; history = [];
+      document.getElementById('score-wins').textContent = '0';
+      document.getElementById('score-losses').textContent = '0';
+      document.getElementById('score-ties').textContent = '0';
+      document.getElementById('player-emoji').textContent = '🤔';
+      document.getElementById('player-name').textContent = '—';
+      document.getElementById('computer-emoji').textContent = '🤫';
+      document.getElementById('computer-name').textContent = '—';
+      const banner = document.getElementById('result-banner');
+      banner.className = 'result-banner';
+      banner.textContent = 'Make your move!';
+      renderHistory();
+    }
+  </script>
+</body>
+</html>
