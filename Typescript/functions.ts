@@ -17,6 +17,10 @@ getUpper("water")
 signIn("Fele","fele@gmail.com", true)
 loginUser("Fels", "fels@yahoo.com", true)
 
+const getHello = (p : string): string =>{
+    return ""
+}
+
 
 const superHeros = ["Thor", "Spiderman", "Wonderwoman"]
 
