@@ -28,4 +28,12 @@ superHeros.map((superHeros): string =>{
     return `Your favorite Hero is ${superHeros}`
 })
 
+//used during the initial phase of building a website. also two error handling methods in typescript
+function consoleError(errmsg: string): void{
+    console.log(errmsg);
+}
+
+ function handleError(errmsg: string): never{
+    throw new error(errmsg);
+}
 export{}
