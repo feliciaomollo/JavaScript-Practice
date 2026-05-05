@@ -10,7 +10,7 @@ function createCourse(): {name: string, price: number}{ //Instead of returning a
 
 export{} //Treat this file as a module, not a global script. Without it, variables and functions could leak into the global scope and clash with other files
 
-//alternative
+//alternative. type is reusable, easy to update and readablity.
 type Course = {
     name: string,
     price: number
