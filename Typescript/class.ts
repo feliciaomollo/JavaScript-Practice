@@ -40,3 +40,61 @@ class Person {
 
 const person1 = new Person("Arjun", 25)
 person1.greet()  // Hi, I am Arjun and I am 25 years old
+
+//readonly
+class Person {
+    constructor(
+        public readonly id: number,
+        public name: string
+    ) {}
+}
+
+const person1 = new Person(1, "Arjun")
+person1.id = 2      // Error — id is readonly
+person1.name = "John"  // Fine
+
+
+//iheritance
+class Animal {
+    constructor(public name: string) {}
+
+    makeSound(): void {
+        console.log(`${this.name} makes a sound`)
+    }
+}
+
+class Dog extends Animal {
+    constructor(name: string, public breed: string) {
+        super(name)  // calls the parent constructor
+    }
+
+    fetch(): void {
+        console.log(`${this.name} is fetching!`)
+    }
+}
+
+const dog = new Dog("Bruno", "Labrador")
+dog.makeSound()  // Bruno makes a sound
+dog.fetch()      // Bruno is fetching!
+
+//Getters and Setters
+class Person {
+    private _age: number = 0
+
+    get age(): number {
+        return this._age
+    }
+
+    set age(value: number) {
+        if(value < 0) {
+            console.log("Age cannot be negative")
+        } else {
+            this._age = value
+        }
+    }
+}
+
+const person1 = new Person()
+person1.age = 25      // calls setter
+console.log(person1.age)  // calls getter — 25
+person1.age = -5      // Age cannot be negative
