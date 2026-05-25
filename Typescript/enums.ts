@@ -57,3 +57,17 @@ enum OrderStatus {
 }
 
 let orderStatus: OrderStatus = OrderStatus.Shipped  // always consistent
+
+
+//What is an enum and when would you use it? Use enums for fixed sets of related values like statuses, roles, or directions.
+// without enum — inconsistent and error prone
+let status: string = "active" // someone could type "Active" or "ACTIVE"
+
+// with enum — consistent and safe
+enum Status {
+    Active = "ACTIVE",
+    Inactive = "INACTIVE",
+    Pending = "PENDING"
+}
+
+let userStatus: Status = Status.Active  // always consistent

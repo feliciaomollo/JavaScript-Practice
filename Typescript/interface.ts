@@ -7,3 +7,13 @@ interface User{
 }
 
 const hitesh: User ={dbId: 556, email: "h@gh.com", userId:8347}
+
+//only extendable by using extends in inheritance.
+// interface can be extended
+interface User {
+    name: string
+}
+
+interface Admin extends User {
+    role: string
+}
