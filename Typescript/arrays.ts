@@ -75,3 +75,12 @@ let fruits: string[] = ["Apple", "Banana", "Mango"]
 
 fruits.push(99)   // ❌ Error — number not assignable to string array
 fruits.push("Grapes")  // ✅ Correct
+
+
+// Q5. How do you declare a typed array in TypeScript?
+let fruits: string[] = ["Apple", "Banana", "Mango"]
+let fruits: Array<string> = ["Apple", "Banana", "Mango"]
+
+// Type safety
+fruits.push(99)      // Error — only strings allowed
+fruits.push("Grapes") 
