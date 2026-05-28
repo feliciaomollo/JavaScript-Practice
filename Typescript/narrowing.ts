@@ -10,7 +10,7 @@ interface Admin{
 }
 
 function loginSystem(login: User | Admin){
-    if("isAdmin" in login){
+    if("isAdmin" in login){ //using the in keyword that helps go into login and check if there's isAdmin is present
         return login.isAdmin
     }    
 }
