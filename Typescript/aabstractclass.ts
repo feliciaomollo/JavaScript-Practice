@@ -35,6 +35,7 @@ const rectangle = new Rectangle(10, 5)
 rectangle.printArea()   // Area is: 50
 
 
+//Abstract Class with Constructor
 abstract class Animal {
     constructor(public name: string, public age: number) {}
 
@@ -68,3 +69,18 @@ dog.makeSound()      // Bruno says: Woof!
 const cat = new Cat("Kitty", 2)
 cat.printDetails()   // Name: Kitty, Age: 2
 cat.makeSound()      // Kitty says: Meow!
+
+
+//abstract vs interface
+interface Shape{
+ getArea(): number
+}
+
+abstract class Shape {
+    abstract getArea(): number
+
+    printArea(): void{
+        console.log(this.getArea)
+    }
+
+}
