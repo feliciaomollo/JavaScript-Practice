@@ -33,3 +33,38 @@ circle.printArea()      // Area is: 78.5
 
 const rectangle = new Rectangle(10, 5)
 rectangle.printArea()   // Area is: 50
+
+
+abstract class Animal {
+    constructor(public name: string, public age: number) {}
+
+    abstract makeSound(): void  // must be implemented
+
+    printDetails(): void {
+        console.log(`Name: ${this.name}, Age: ${this.age}`)
+    }
+}
+
+class Dog extends Animal {
+    constructor(name: string, age: number, public breed: string) {
+        super(name, age)  // calls abstract class constructor
+    }
+
+    makeSound(): void {
+        console.log(`${this.name} says: Woof!`)
+    }
+}
+
+class Cat extends Animal {
+    makeSound(): void {
+        console.log(`${this.name} says: Meow!`)
+    }
+}
+
+const dog = new Dog("Bruno", 3, "Labrador")
+dog.printDetails()   // Name: Bruno, Age: 3
+dog.makeSound()      // Bruno says: Woof!
+
+const cat = new Cat("Kitty", 2)
+cat.printDetails()   // Name: Kitty, Age: 2
+cat.makeSound()      // Kitty says: Meow!
