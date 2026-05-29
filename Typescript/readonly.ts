@@ -26,4 +26,27 @@ type cardDetails = cardDate & cardNumber & {
 
 myCourse.name = "Andeezy"
 myCourse._id = "" //cannot assign ID as its a readonly property
+
+
+
+//membership example
+
+type Membership = {
+    name: string,
+    email: string,
+    passoword: number,
+    readonly _UID: number
+    passport?: number
+}
+
+let mpesaAccount: membership = {
+    name: "Fletcher",
+    email: "Beckysohotv@vintage.tshirt",
+    passoword: "@mypasscode1",
+    _UID: 7346587
+    passport: 99
+}
+
+
+ 
 export{}
