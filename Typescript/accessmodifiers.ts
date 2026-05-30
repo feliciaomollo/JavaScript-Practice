@@ -16,7 +16,6 @@ console.log(person1.age)     // Error — private
 console.log(person1.email)   // Error — protected
 
 
-//Shorthand Constructor
 // Long way
 class Person {
     name: string

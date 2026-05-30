@@ -84,3 +84,41 @@ abstract class Shape {
     }
 
 }
+
+//types of methods
+abstract class Animal {
+    abstract makeSound(): void  // no body — subclass MUST implement
+
+    sleep(): void {             // has body — shared by all subclasses
+        console.log("Zzzz...")
+    }
+}
+
+abstract class Animal {
+    abstract makeSound(): void  // The only difference between a method and a regular function is that a method lives inside a class.
+
+    sleep(): void {
+        console.log("Zzzz...")  // shared by all animals
+    }
+}
+
+class Dog extends Animal {
+    makeSound(): void {
+        console.log("Woof!")  // Dog's own implementation
+    }
+}
+
+class Cat extends Animal {
+    makeSound(): void {
+        console.log("Meow!")  // Cat's own implementation
+    }
+}
+
+const dog = new Dog()
+dog.makeSound()  // Woof!
+dog.sleep()      // Zzzz...
+
+const cat = new Cat()
+cat.makeSound()  // Meow!
+
+const animal = new Animal()  //  Error — cannot instantiate

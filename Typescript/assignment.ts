@@ -10,7 +10,7 @@ class BankAccount {
 
     }
 
-    deposit(amount: number): void {
+    deposit(amount: number): void { //method
         this.balance += amount
         console.log(`Deposited ${amount}. New balance: ${this.balance}`)
     }
