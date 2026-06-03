@@ -14,3 +14,9 @@ function loginSystem(login: User | Admin){
         return login.isAdmin
     }    
 }
+
+function detectType(val: number | string){
+    if(typeof val === "string"){
+        return val.toLowerCase
+    }
+}
