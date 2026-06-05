@@ -35,14 +35,25 @@ let Id: UserId;
 Id = 'hsgh',
 Id = 123
 
+//create blueprint
 type UserProfile = {
     username: string;
     email: string;
     age: number;
+    isValid: boolean
 };
 
+//give blueprint life
 const User1: UserProfile = {
     username: 'Andiego',
     email: 'andiego@gmail.com',
-    age: 28
+    age: 28,
+    isValid: true
 }
+
+//create a function that calls the blueprint that came to life
+function checkUser(profile: UserProfile){
+    return `Hello ${profile.username}, are you valid ${profile.isValid}`;
+}
+
+console.log(checkUser(User1));
