@@ -27,9 +27,22 @@ function drawShape(shape: Shape, position: Point): void {
 
 drawShape("circle", { x: 10, y: 20 });
 
-//alias for union type
+//alias for union type.ID is a type alias that allows a variable to be either a number or a string.
+//This provides flexibility for userId to accept both numeric and alphanumeric identifiers.
 type UserId = number | string;
 
 let Id: UserId;
 Id = 'hsgh',
 Id = 123
+
+type UserProfile = {
+    username: string;
+    email: string;
+    age: number;
+};
+
+const User1: UserProfile = {
+    username: 'Andiego',
+    email: 'andiego@gmail.com',
+    age: 28
+}
