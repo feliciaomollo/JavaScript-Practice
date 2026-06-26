@@ -32,3 +32,22 @@ class Student extends Person implements Enrollable {
         console.log(`${this.name}'s courses: ${this.courses.join(", ")}`)
     }
 }
+
+class Teacher extends Person {
+    constructor(
+        name: string,
+        age: number,
+        id: number,
+        public department: string
+    ) {
+        super(name, age, id)
+    }
+
+    getRole(): string {
+        return "Teacher"
+    }
+
+    teach(): void {
+        console.log(`Mr. ${this.name} is teaching in the ${this.department} department`)
+    }
+}
