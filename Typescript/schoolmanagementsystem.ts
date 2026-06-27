@@ -51,3 +51,15 @@ class Teacher extends Person {
         console.log(`Mr. ${this.name} is teaching in the ${this.department} department`)
     }
 }
+
+const student = new Student("Arjun", 20, 1)
+getDetails(student)
+student.enroll("Mathematics")
+student.enroll("Science")
+student.printCourses()
+
+console.log("")
+
+const teacher = new Teacher("John", 35, 2, "Science")
+getDetails(teacher)
+teacher.teach()
